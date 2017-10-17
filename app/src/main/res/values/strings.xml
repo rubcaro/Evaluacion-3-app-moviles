@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Evaluacion 2</string>
+    <string-array name="menuItems">
+        <item>Administración de clientes</item>
+        <item>Ingresar pedido</item>
+        <item>Entregar pedido</item>
+        <item>Listar productos</item>
+        <item>Salir</item>
+    </string-array>
+    <string-array name="clientOptions">
+        <item>Crear cliente</item>
+        <item>Modificar cliente</item>
+        <item>Volver</item>
+    </string-array>
 </resources>

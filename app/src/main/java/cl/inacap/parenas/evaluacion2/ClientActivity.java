@@ -7,33 +7,25 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class MenuActivity extends AppCompatActivity {
+public class ClientActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu2);
+        setContentView(R.layout.activity_cliente);
         AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> listView, View v, int position, long id) {
                 if (position == 0) {
-                    Intent intent = new Intent(MenuActivity.this, ClientActivity.class);
+                    Intent intent = new Intent(ClientActivity.this, AddClientActivity.class);
                     startActivity(intent);
                 }
                 else if (position == 1) {
-                    Intent intent = new Intent(MenuActivity.this, EnterOrderActivity.class);
+                    Intent intent = new Intent(ClientActivity.this, ModifyClientActivity.class);
                     startActivity(intent);
                 }
                 else if (position == 2) {
-                    Intent intent = new Intent(MenuActivity.this, DeliverOrderActivity.class);
-                    startActivity(intent);
-                }
-                else if (position == 3) {
-                    Intent intent = new Intent(MenuActivity.this, ProductListActivity.class);
-                    startActivity(intent);
-                }
-                else if (position == 4) {
-                    Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                    Intent intent = new Intent(ClientActivity.this, MenuActivity.class);
                     startActivity(intent);
                 }
             }

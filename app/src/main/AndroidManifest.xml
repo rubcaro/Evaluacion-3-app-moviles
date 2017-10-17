@@ -18,6 +18,18 @@
         </activity>
         <activity android:name=".MenuActivity">
         </activity>
+        <activity android:name=".ClientActivity">
+        </activity>
+        <activity android:name=".EnterOrderActivity">
+        </activity>
+        <activity android:name=".DeliverOrderActivity">
+        </activity>
+        <activity android:name=".ProductListActivity">
+        </activity>
+        <activity android:name=".AddClientActivity">
+        </activity>
+        <activity android:name=".ModifyClientActivity">
+        </activity>
     </application>
 
 </manifest>
