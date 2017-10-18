@@ -30,6 +30,8 @@
         </activity>
         <activity android:name=".ModifyClientActivity">
         </activity>
+        <activity android:name=".EditClientActivity">
+        </activity>
     </application>
 
 </manifest>

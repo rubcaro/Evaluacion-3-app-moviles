@@ -6,53 +6,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cl.inacap.parenas.evaluacion2.AddClientActivity">
+    tools:context="cl.inacap.parenas.evaluacion2.EditClientActivity"
+    tools:layout_editor_absoluteY="25dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="70dp"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:id="@+id/clientTitle"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="Nombre"/>
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="97dp"
+        android:orientation="horizontal"
+        >
 
         <EditText
             android:id="@+id/clientName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"/>
+            android:inputType="textPersonName"
+            />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="0.30"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="addClient"
-            android:text="Ingresar cliente"/>
+            android:text="Editar datos"
+            android:onClick="edit"/>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Eliminar cliente"
+            android:onClick="delete"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="345dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Volver"
             android:onClick="back"/>
     </LinearLayout>
-
 </LinearLayout>
