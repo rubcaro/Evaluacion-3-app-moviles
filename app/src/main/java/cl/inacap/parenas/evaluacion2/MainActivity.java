@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import cl.inacap.parenas.evaluacion2.modelo.User;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,12 +20,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(View view) {
         EditText userText = (EditText) findViewById(R.id.userName);
-        String user = userText.getText().toString();
+        String userName = userText.getText().toString();
 
         EditText passwordText = (EditText) findViewById(R.id.password);
         String password = passwordText.getText().toString();
 
-        if ("user".equals(user) && "secret".equals(password)) {
+        User user = new User();
+        user.setName(userName);
+        user.setPassword(password);
+
+        if (user.checkLogin()) {
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
         } else {

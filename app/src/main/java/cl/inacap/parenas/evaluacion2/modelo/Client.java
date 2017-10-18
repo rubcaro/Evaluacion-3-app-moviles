@@ -1,5 +1,7 @@
 package cl.inacap.parenas.evaluacion2.modelo;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +46,7 @@ public class Client {
 
     public List<Client> getClients() {
         List<Client> availableClients = new ArrayList<>();
+        Log.d("mensaje", String.valueOf(clients.size()));
         for(Client c : clients) {
             if(c.getState() == 1) {
                 availableClients.add(c);
