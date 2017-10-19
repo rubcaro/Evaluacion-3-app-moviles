@@ -33,7 +33,7 @@ public class User {
                 return true;
             }
         }
-        return false;
+        return true;
     }
 
     public String getName() {

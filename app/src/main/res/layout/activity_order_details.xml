@@ -5,12 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cl.inacap.parenas.evaluacion2.DeliverOrderActivity">
-
-    <ListView
-        android:id="@+id/android:list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </ListView>
+    tools:context="cl.inacap.parenas.evaluacion2.OrderDetailsActivity">
 
 </android.support.constraint.ConstraintLayout>

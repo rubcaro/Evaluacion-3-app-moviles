@@ -3,29 +3,29 @@ package cl.inacap.parenas.evaluacion2.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import cl.inacap.parenas.evaluacion2.R;
+
 /**
  * Created by Rubén on 18-10-2017.
  */
 
 public class Product {
     private String name;
-    private int quantity;
-    private int product_id;
-    public static int id = 0;
+    private String description;
+    private int imageId;
 
     public static final List<Product> products = new ArrayList<Product>() {{
-        add(new Product("Tomate", 50));
-        add(new Product("Palta", 30));
-        add(new Product("Queso", 10));
-        add(new Product("Manzana", 60));
-        add(new Product("Pera", 30));
+        add(new Product("Tomate", R.drawable.tomate, "Descripción del tomate"));
+        add(new Product("Palta", R.drawable.palta,  "Descripción de la palta"));
+        add(new Product("Queso", R.drawable.queso,  "Descripción del queso"));
+        add(new Product("Manzana", R.drawable.manzana,  "Descripción de la manzana"));
+        add(new Product("Pera", R.drawable.pera, "Descripción de la pera"));
     }} ;
 
-    public Product(String name, int quantity) {
+    public Product(String name, int imageId, String description) {
         this.name = name;
-        this.quantity = quantity;
-        this.id++;
-        this.product_id = this.id;
+        this.imageId = imageId;
+        this.description = description;
     }
 
     public Product() {
@@ -43,20 +43,20 @@ public class Product {
         this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getDescription() {
+        return description;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public int getImageId() {
+        return imageId;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 
     @Override
