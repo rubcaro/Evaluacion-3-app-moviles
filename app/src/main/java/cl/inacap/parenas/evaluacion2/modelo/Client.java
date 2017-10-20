@@ -9,6 +9,7 @@ import java.util.List;
  * Created by Rubén on 17-10-2017.
  */
 
+
 public class Client {
     private String name;
     private int state;

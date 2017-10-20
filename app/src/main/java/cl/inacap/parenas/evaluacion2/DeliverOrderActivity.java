@@ -27,7 +27,7 @@ public class DeliverOrderActivity extends ListActivity {
 
     @Override
     public void onListItemClick(ListView ListView, View item, int posicion, long id) {
-        Intent intent = new Intent(DeliverOrderActivity.this, EditClientActivity.class);
+        Intent intent = new Intent(DeliverOrderActivity.this, OrderDetailsActivity.class);
         intent.putExtra("order", (int)id);
         startActivity(intent);
     }

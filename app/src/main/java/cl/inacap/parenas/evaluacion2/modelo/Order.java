@@ -14,6 +14,7 @@ public class Order {
     public String date;
     public String client;
     public List<Integer> products;
+    public String state;
 
     public static final List<Order> orders = new ArrayList<Order>() {{
 
@@ -21,6 +22,7 @@ public class Order {
 
     public Order() {
         this.products = new ArrayList<Integer>();
+        this.state = "No entregado";
     }
 
     public void addProduct(int id) {
@@ -63,9 +65,17 @@ public class Order {
         this.products = products;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
 
-        return client + " " + date + " " + value + " " + products.get(0);
+        return "Cliente: " + client + " Fecha: " + date + " Estado: " + state;
     }
 }
