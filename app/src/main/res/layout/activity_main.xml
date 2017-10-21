@@ -40,8 +40,8 @@
             android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            />
+            android:hint="Ingrese nombre del usuario"
+            android:inputType="textPersonName"/>
 
     </LinearLayout>
 
@@ -67,6 +67,8 @@
             android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:ems="10"
+            android:fontFamily="sans-serif"
+            android:hint="Ingrese contraseña"
             android:inputType="textPassword"/>
 
     </LinearLayout>

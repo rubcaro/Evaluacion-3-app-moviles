@@ -18,8 +18,8 @@ public class Client {
     public static int id = 0;
 
     public static final List<Client> clients = new ArrayList<Client>(){{
-        add(new Client("Kiosko Nombre 1", "Kiosko"));
-        add(new Client("Almace nombre 1", "Almacen"));
+        add(new Client("Kiosko José", "Kiosko"));
+        add(new Client("Almace Carlos", "Almacen"));
     }};
 
     public Client(String name, String type) {
@@ -49,7 +49,6 @@ public class Client {
 
     public List<Client> getClients() {
         List<Client> availableClients = new ArrayList<>();
-        Log.d("mensaje", String.valueOf(clients.size()));
         for(Client c : clients) {
             if(c.getState() == 1) {
                 availableClients.add(c);

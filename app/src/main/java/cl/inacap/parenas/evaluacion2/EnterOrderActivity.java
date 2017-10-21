@@ -66,7 +66,6 @@ public class EnterOrderActivity extends ListActivity {
         });
 
         ListView clientList = getListView();
-        //Product product = new Product();
         ArrayAdapter<Product> listaAdapterProduct = new ArrayAdapter<Product>(this,
                 android.R.layout.simple_list_item_1,Product.products );
         clientList.setAdapter(listaAdapterProduct);
@@ -81,19 +80,29 @@ public class EnterOrderActivity extends ListActivity {
     }
 
     public void addProduct(View view) {
+
+
+
         TextView productQuantityText = (TextView) findViewById(R.id.productQuantity);
         String productQuantity = productQuantityText.getText().toString();
 
         TextView selectedProductText = (TextView) findViewById(R.id.selectedProduct);
         String selectedProduct = selectedProductText.getText().toString();
 
-        order.addProduct(currentIdProduct);
-        TextView productsList = (TextView) findViewById(R.id.productsList);
-        String value = productsList.getText().toString().concat("\n Producto: " + selectedProduct + "-  Cantidad: " + productQuantity);
-        productsList.setText(value);
+        if(!selectedProduct.equals("") && !productQuantity.equals("")) {
+            order.addProduct(currentIdProduct);
+            TextView productsList = (TextView) findViewById(R.id.productsList);
+            String value = productsList.getText().toString().concat("\n Producto: " + selectedProduct + " -  Cantidad: " + productQuantity);
+            productsList.setText(value);
 
-        productQuantityText.setText("");
-        selectedProductText.setText("");
+            productQuantityText.setText("");
+            selectedProductText.setText("");
+
+        } else {
+            Toast msgError = Toast.makeText(this, "Seleccione un producto/cantidad primero", Toast.LENGTH_LONG);
+            msgError.show();
+        }
+
     }
 
     public void addOrder(View view) {

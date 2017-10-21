@@ -45,8 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            />
+            android:hint="Ingrese nombre del cliente"
+            android:inputType="textPersonName"/>
     </LinearLayout>
 
     <LinearLayout
@@ -68,8 +68,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            />
+            android:hint="Almacen, kiosko, etc."
+            android:inputType="textPersonName"/>
     </LinearLayout>
 
     <LinearLayout
