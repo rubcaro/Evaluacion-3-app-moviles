@@ -29,10 +29,6 @@ public class MenuActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if (position == 3) {
-                    Intent intent = new Intent(MenuActivity.this, ProductListActivity.class);
-                    startActivity(intent);
-                }
-                else if (position == 4) {
                     Intent intent = new Intent(MenuActivity.this, MainActivity.class);
                     startActivity(intent);
                 }

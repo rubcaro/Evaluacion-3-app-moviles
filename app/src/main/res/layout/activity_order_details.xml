@@ -6,6 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
     tools:context="cl.inacap.parenas.evaluacion2.OrderDetailsActivity">
 
     <LinearLayout
@@ -34,8 +37,8 @@
         android:layout_width="375dp"
         android:layout_height="31dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteY="55dp"
-        tools:layout_editor_absoluteX="5dp">
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="55dp">
 
         <TextView
             android:id="@+id/textView7"
@@ -105,15 +108,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Entregar"
-            android:onClick="deliver"/>
+            android:onClick="deliver"
+            android:text="Entregar"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/button11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Volver"
-        android:onClick="back"/>
+        android:onClick="back"
+        android:text="Volver"/>
 
 </LinearLayout>

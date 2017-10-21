@@ -4,7 +4,6 @@
         <item>Administración de clientes</item>
         <item>Ingresar pedido</item>
         <item>Entregar pedido</item>
-        <item>Listar productos</item>
         <item>Salir</item>
     </string-array>
     <string-array name="clientOptions">

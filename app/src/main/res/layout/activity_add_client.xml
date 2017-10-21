@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     tools:context="cl.inacap.parenas.evaluacion2.AddClientActivity">
 
     <LinearLayout
@@ -77,8 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Volver"
-            android:onClick="back"/>
+            android:onClick="back"
+            android:text="Volver"/>
     </LinearLayout>
 
 </LinearLayout>
