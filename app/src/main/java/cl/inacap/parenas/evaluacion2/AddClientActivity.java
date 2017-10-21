@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import cl.inacap.parenas.evaluacion2.modelo.Client;
-import cl.inacap.parenas.evaluacion2.modelo.ClientList;
 
 public class AddClientActivity extends AppCompatActivity {
 
@@ -22,7 +21,10 @@ public class AddClientActivity extends AppCompatActivity {
         EditText client = (EditText) findViewById(R.id.clientName);
         String clientName = client.getText().toString();
 
-        Client currentClient = new Client(clientName);
+        EditText clientTypeText = (EditText) findViewById(R.id.clientType);
+        String clientType = clientTypeText.getText().toString();
+
+        Client currentClient = new Client(clientName, clientType);
         currentClient.addClient();
         Toast msgError = Toast.makeText(this, "Cliente correctamente ingresado", Toast.LENGTH_LONG);
         msgError.show();

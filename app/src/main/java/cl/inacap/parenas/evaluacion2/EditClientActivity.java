@@ -30,6 +30,9 @@ public class EditClientActivity extends AppCompatActivity {
         EditText name = (EditText) findViewById(R.id.clientName);
         name.setText(clients.get(clientNumber).getName());
 
+        EditText clientTypeText = (EditText) findViewById(R.id.clientTypeText);
+        clientTypeText.setText(clients.get(clientNumber).getType());
+
     }
 
     public void back(View view) {
@@ -50,9 +53,15 @@ public class EditClientActivity extends AppCompatActivity {
     public void edit(View view) {
         Log.d("mensaje",String.valueOf( c.getClients().get((Integer)getIntent().getExtras().get("client")).getClientId()-1));
         Client editedClient = c.clients.get(c.getClients().get((Integer)getIntent().getExtras().get("client")).getClientId()-1);
+
         EditText client = (EditText) findViewById(R.id.clientName);
         String clientName = client.getText().toString();
+
+        EditText clientTypeText = (EditText) findViewById(R.id.clientTypeText);
+        String clientType = clientTypeText.getText().toString();
+
         editedClient.setName(clientName);
+        editedClient.setType(clientType);
         editedClient.edit();
         Toast msgError = Toast.makeText(this, "Usuario correctamente editado", Toast.LENGTH_LONG);
         msgError.show();

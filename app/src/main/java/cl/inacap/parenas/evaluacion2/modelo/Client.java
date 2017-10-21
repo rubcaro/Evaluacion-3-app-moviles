@@ -13,17 +13,19 @@ import java.util.List;
 public class Client {
     private String name;
     private int state;
+    private String type;
     private int clientId;
     public static int id = 0;
 
     public static final List<Client> clients = new ArrayList<Client>(){{
-        add(new Client("Carlos"));
-        add(new Client("Juan"));
+        add(new Client("Kiosko Nombre 1", "Kiosko"));
+        add(new Client("Almace nombre 1", "Almacen"));
     }};
 
-    public Client(String name) {
+    public Client(String name, String type) {
         this.name = name;
         this.state = 1;
+        this.type = type;
         this.id++;
         this.clientId = this.id;
     }
@@ -80,9 +82,17 @@ public class Client {
         this.clientId = clientId;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
-        return name + this.getClientId();
+        return name;
     }
 
 }

@@ -42,25 +42,20 @@ public class EnterOrderActivity extends ListActivity {
                 android.R.layout.simple_list_item_1, client.getClients());
         spinner.setAdapter(listaAdapter);
 
-        // initiate the date picker and a button
         date = (EditText) findViewById(R.id.date);
-        // perform click event on edit text
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // calender class's instance and get current date , month and year from calender
                 final Calendar c = Calendar.getInstance();
-                int mYear = c.get(Calendar.YEAR); // current year
-                int mMonth = c.get(Calendar.MONTH); // current month
-                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-                // date picker dialog
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
                 datePickerDialog = new DatePickerDialog(EnterOrderActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                // set day of month , month and year value in the edit text
                                 date.setText(dayOfMonth + "/"
                                         + (monthOfYear + 1) + "/" + year);
 
@@ -94,8 +89,11 @@ public class EnterOrderActivity extends ListActivity {
 
         order.addProduct(currentIdProduct);
         TextView productsList = (TextView) findViewById(R.id.productsList);
-        String value = productsList.getText().toString().concat(" " + selectedProduct + " " + productQuantity);
+        String value = productsList.getText().toString().concat("\n Producto: " + selectedProduct + "-  Cantidad: " + productQuantity);
         productsList.setText(value);
+
+        productQuantityText.setText("");
+        selectedProductText.setText("");
     }
 
     public void addOrder(View view) {
