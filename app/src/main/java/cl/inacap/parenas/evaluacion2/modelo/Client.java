@@ -16,6 +16,7 @@ public class Client {
     private String type;
     private int clientId;
     public static int id = 0;
+    private String prueba;
 
     public static final List<Client> clients = new ArrayList<Client>(){{
         add(new Client("Kiosko José", "Kiosko"));
