@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import cl.inacap.parenas.evaluacion2.modelo.ClientDatabaseHelper;
 import cl.inacap.parenas.evaluacion2.modelo.User;
 
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

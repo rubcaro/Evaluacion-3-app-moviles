@@ -19,6 +19,7 @@ import org.w3c.dom.Text;
 import java.util.Calendar;
 
 import cl.inacap.parenas.evaluacion2.modelo.Client;
+import cl.inacap.parenas.evaluacion2.modelo.ClientDatabaseHelper;
 import cl.inacap.parenas.evaluacion2.modelo.Order;
 import cl.inacap.parenas.evaluacion2.modelo.Product;
 
@@ -28,6 +29,8 @@ public class EnterOrderActivity extends ListActivity {
     DatePickerDialog datePickerDialog;
     int currentIdProduct;
     Order order;
+    ClientDatabaseHelper helper = new ClientDatabaseHelper(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,7 @@ public class EnterOrderActivity extends ListActivity {
         Client client = new Client();
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<Client> listaAdapter = new ArrayAdapter<Client>(this,
-                android.R.layout.simple_list_item_1, client.getClients());
+                android.R.layout.simple_list_item_1, helper.listClients());
         spinner.setAdapter(listaAdapter);
 
         date = (EditText) findViewById(R.id.date);
@@ -67,7 +70,7 @@ public class EnterOrderActivity extends ListActivity {
 
         ListView clientList = getListView();
         ArrayAdapter<Product> listaAdapterProduct = new ArrayAdapter<Product>(this,
-                android.R.layout.simple_list_item_1,Product.products );
+                android.R.layout.simple_list_item_1,helper.listProducts() );
         clientList.setAdapter(listaAdapterProduct);
 
     }

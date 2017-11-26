@@ -81,7 +81,13 @@ public class Client {
 
     @Override
     public String toString() {
-        return rut;
+        return "[" +
+                "Rut: " + rut + '\'' +
+                "Nombre del local: " + localName + '\'' +
+                "Nombre de contacto: " + contactName + '\'' +
+                "Dirección: " + address + '\'' +
+                "Telefono: " + phone + '\'' +
+                "]";
     }
 
 }

@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import cl.inacap.parenas.evaluacion2.modelo.Client;
+import cl.inacap.parenas.evaluacion2.modelo.ClientDatabaseHelper;
 
 public class AddClientActivity extends AppCompatActivity {
 
@@ -18,16 +19,35 @@ public class AddClientActivity extends AppCompatActivity {
     }
 
     public void addClient (View view) {
-        EditText client = (EditText) findViewById(R.id.clientName);
-        String clientName = client.getText().toString();
+        Toast msg;
+        EditText clientRutText = (EditText) findViewById(R.id.clientRut);
+        String clientRut = clientRutText.getText().toString();
 
-        EditText clientTypeText = (EditText) findViewById(R.id.clientType);
-        String clientType = clientTypeText.getText().toString();
+        EditText clientLocalNameText = (EditText) findViewById(R.id.clientLocalName);
+        String clientLocalName = clientLocalNameText.getText().toString();
 
-        Client currentClient = new Client(clientName, clientType);
-        currentClient.addClient();
-        Toast msgError = Toast.makeText(this, "Cliente correctamente ingresado", Toast.LENGTH_LONG);
-        msgError.show();
+        EditText clientContactNameText = (EditText) findViewById(R.id.clientContactName);
+        String clientContactName = clientLocalNameText.getText().toString();
+
+        EditText clientAddressText = (EditText) findViewById(R.id.clientAddress);
+        String clientAddress = clientAddressText.getText().toString();
+
+        EditText clientPhoneText = (EditText) findViewById(R.id.clientPhone);
+        String clientPhone = clientPhoneText.getText().toString();
+
+        if (clientRut.compareTo("")!=0 && clientLocalName.compareTo("")!=0 && clientContactName.compareTo("")!=0
+                && clientAddress.compareTo("")!=0 && clientPhone.compareTo("")!=0) {
+
+            ClientDatabaseHelper helper = new ClientDatabaseHelper(this);
+            Client currentClient = new Client(clientRut, clientLocalName, clientContactName,clientAddress, clientPhone);
+            helper.addClient(currentClient);
+            msg = Toast.makeText(this, "Cliente correctamente ingresado", Toast.LENGTH_LONG);
+
+        } else {
+            msg = Toast.makeText(this, "Complete todos los campos por favor", Toast.LENGTH_LONG);
+        }
+
+        msg.show();
     }
 
     public void back(View view) {

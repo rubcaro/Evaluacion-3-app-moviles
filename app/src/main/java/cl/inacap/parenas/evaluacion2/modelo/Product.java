@@ -13,6 +13,7 @@ public class Product {
     private String name;
     private String description;
     private int imageId;
+    private int id;
 
     public static final List<Product> products = new ArrayList<Product>() {{
         add(new Product("Tomate", R.drawable.tomate, "Descripción del tomate"));
@@ -29,6 +30,14 @@ public class Product {
     }
 
     public Product() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public static List<Product> getProducts() {
