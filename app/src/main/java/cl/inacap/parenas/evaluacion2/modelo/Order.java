@@ -1,8 +1,5 @@
 package cl.inacap.parenas.evaluacion2.modelo;
 
-import android.util.Log;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,27 +7,31 @@ import java.util.List;
  */
 
 public class Order {
-    public int value;
-    public String date;
-    public String client;
-    public List<Integer> products;
-    public String state;
+    private String id; //String por que no quise cambiar todas las cosas :)
+    private String date;
+    private int value;
+    private int state;
+    private Client client;
+    private List<ProductOrder> products;
 
-    public static final List<Order> orders = new ArrayList<Order>() {{
+    public static final int DELIVERED = 1;
+    public static final int  NOT_DELIVERED = 0;
 
-    }};
+    public Order(String date, int value, int state) {
+        this.date = date;
+        this.value = value;
+        this.state = state;
+    }
 
     public Order() {
-        this.products = new ArrayList<Integer>();
-        this.state = "No entregado";
     }
 
-    public void addProduct(int id) {
-        this.products.add(id);
+    public String getState() {
+        return this.state  == Order.DELIVERED ? "entregado" : "no entregado";
     }
 
-    public void save() {
-        orders.add(this);
+    public void setState(int state) {
+        this.state = state;
     }
 
     public String getDate() {
@@ -41,14 +42,6 @@ public class Order {
         this.date = date;
     }
 
-    public String getClient() {
-        return client;
-    }
-
-    public void setClient(String client) {
-        this.client = client;
-    }
-
     public int getValue() {
         return value;
     }
@@ -57,25 +50,38 @@ public class Order {
         this.value = value;
     }
 
-    public List<Integer> getProducts() {
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<ProductOrder> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Integer> products) {
+    public void setProducts(List<ProductOrder> products) {
         this.products = products;
     }
 
-    public String getState() {
-        return state;
+    public String getId() {
+        return id;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
 
-        return "Cliente: " + client + " Fecha: " + date + " Estado: " + state;
+        return "[" +
+                "Fecha: " + this.date + '\''+
+                "Rut Cliente: " + this.client.getRut() + '\'' +
+                "Total a pagar: " + this.getValue() + '\'' +
+                "Estado: " + this.getState() + '\'' +
+                "]";
     }
 }

@@ -1,34 +1,29 @@
 package cl.inacap.parenas.evaluacion2.modelo;
 
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Rubén on 17-10-2017.
  */
 
 
 public class Client {
-    private String name;
+    private String rut;
+    private String localName;
+    private String contactName;
+    private String address;
+    private String phone;
+    private String id;
     private int state;
-    private String type;
-    private int clientId;
-    public static int id = 0;
-    private String prueba;
 
-    public static final List<Client> clients = new ArrayList<Client>(){{
-        add(new Client("Kiosko José", "Kiosko"));
-        add(new Client("Almace Carlos", "Almacen"));
-    }};
+    public static final int ACTIVE_CLIENT = 1;
+    public static final int INACTIVE_CLIENT = 0;
 
-    public Client(String name, String type) {
-        this.name = name;
+    public Client(String rut, String localname, String contactName, String address, String phone) {
+        this.rut = rut;
+        this.localName = localname;
+        this.contactName = contactName;
+        this.address = address;
+        this.phone = phone;
         this.state = 1;
-        this.type = type;
-        this.id++;
-        this.clientId = this.id;
     }
 
 
@@ -36,63 +31,57 @@ public class Client {
 
     }
 
-    public void addClient() {
-        clients.add(this);
+    public String getRut() {
+        return rut;
     }
 
-    public void deleteClient(int id) {
-        clients.get(id).setState(0);
+    public void setRut(String rut) {
+        this.rut = rut;
     }
 
-    public void edit() {
-        clients.set(this.getClientId()-1, this);
+    public String getLocalName() {
+        return localName;
     }
 
-    public List<Client> getClients() {
-        List<Client> availableClients = new ArrayList<>();
-        for(Client c : clients) {
-            if(c.getState() == 1) {
-                availableClients.add(c);
-            }
-        }
-        return availableClients;
+    public void setLocalName(String localName) {
+        this.localName = localName;
     }
 
-    public String getName() {
-        return name;
+    public String getContactName() {
+        return contactName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
-    public int getState() {
-        return state;
+    public String getAddress() {
+        return address;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public int getClientId() {
-        return clientId;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getType() {
-        return type;
+    public String getId() {
+        return id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return name;
+        return rut;
     }
 
 }
