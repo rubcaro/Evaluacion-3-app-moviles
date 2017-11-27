@@ -26,7 +26,7 @@ public class OrderDetailsActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
 
-        int orderNumber = (Integer)getIntent().getExtras().get("order");
+       /* int orderNumber = (Integer)getIntent().getExtras().get("order");
         order = Order.orders.get(orderNumber);
 
         TextView clientNameText = (TextView) findViewById(R.id.clientNameText);
@@ -49,7 +49,7 @@ public class OrderDetailsActivity extends ListActivity {
         ListView clientList = getListView();
         ArrayAdapter<Product> listaAdapter = new ArrayAdapter<Product>(this,
                 android.R.layout.simple_list_item_1, products);
-        clientList.setAdapter(listaAdapter);
+        clientList.setAdapter(listaAdapter);*/
     }
 
     public void back(View view) {
@@ -58,7 +58,7 @@ public class OrderDetailsActivity extends ListActivity {
     }
 
     public void deliver(View view) {
-        order.setState("Entregado");
+        //order.setState("Entregado");
 
         TextView stateText =(TextView) findViewById(R.id.stateText);
         stateText.setText("Estado: " + order.getState());

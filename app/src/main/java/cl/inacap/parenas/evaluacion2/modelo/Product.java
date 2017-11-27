@@ -13,20 +13,22 @@ public class Product {
     private String name;
     private String description;
     private int imageId;
+    private int value;
     private int id;
 
-    public static final List<Product> products = new ArrayList<Product>() {{
+   /* public static final List<Product> products = new ArrayList<Product>() {{
         add(new Product("Tomate", R.drawable.tomate, "Descripción del tomate"));
         add(new Product("Palta", R.drawable.palta,  "Descripción de la palta"));
         add(new Product("Queso", R.drawable.queso,  "Descripción del queso"));
         add(new Product("Manzana", R.drawable.manzana,  "Descripción de la manzana"));
         add(new Product("Pera", R.drawable.pera, "Descripción de la pera"));
-    }} ;
+    }} ;*/
 
-    public Product(String name, int imageId, String description) {
+    public Product(String name, int imageId, String description, int value) {
         this.name = name;
         this.imageId = imageId;
         this.description = description;
+        this.value = value;
     }
 
     public Product() {
@@ -40,9 +42,6 @@ public class Product {
         this.id = id;
     }
 
-    public static List<Product> getProducts() {
-        return products;
-    }
 
     public String getName() {
         return name;
@@ -68,8 +67,17 @@ public class Product {
         this.imageId = imageId;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
-        return name;
+
+        return name + " $" + value;
     }
 }

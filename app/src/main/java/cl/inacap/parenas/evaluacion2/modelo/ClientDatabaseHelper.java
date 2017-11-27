@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import cl.inacap.parenas.evaluacion2.R;
  */
 
 public class ClientDatabaseHelper extends SQLiteOpenHelper{
-    private static final String DB_NAME = "bd_orders";
+    private static final String DB_NAME = "bd_orders5";
     private static final int DB_VERSION = 1;
 
     public ClientDatabaseHelper(Context context) {
@@ -32,7 +33,7 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
                 "RUT TEXT, LOCAL_NAME TEXT, CONTACT_NAME TEXT, ADDRESS TEXT, PHONE TEXT, STATE INT);";
         String sqlProduct = "CREATE TABLE PRODUCTS(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "NAME TEXT, DESCRIPTION TEXT, IMAGE_ID INT);";
+                "NAME TEXT, DESCRIPTION TEXT, IMAGE_ID INT, VALUE INT);";
         String sqlOrder = "CREATE TABLE ORDERS(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "DATE TEXT, VALUE INT, STATE INT, CLIENT_RUT TEXT);";
@@ -43,7 +44,7 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(sqlProduct);
         sqLiteDatabase.execSQL(sqlOrder);
         sqLiteDatabase.execSQL(sqlProductOrder);
-        loadProducts();
+        loadProducts(sqLiteDatabase);
     }
 
     @Override
@@ -52,17 +53,17 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
         onCreate(sqLiteDatabase);
     }
 
-    public void loadProducts() {
-        addProduct((new Product("Tomate", R.drawable.tomate, "Descripción del tomate")));
-        addProduct(new Product("Palta", R.drawable.palta,  "Descripción de la palta"));
-        addProduct(new Product("Queso", R.drawable.queso,  "Descripción del queso"));
-        addProduct(new Product("Manzana", R.drawable.manzana,  "Descripción de la manzana"));
-        addProduct(new Product("Pera", R.drawable.pera, "Descripción de la pera"));
+    public void loadProducts(SQLiteDatabase db) {
+        addProduct(db,(new Product("Tomate", R.drawable.tomate, "Descripción del tomate", 1000)));
+        addProduct(db,new Product("Palta", R.drawable.palta,  "Descripción de la palta", 2000));
+        addProduct(db,new Product("Queso", R.drawable.queso,  "Descripción del queso", 3000));
+        addProduct(db,new Product("Manzana", R.drawable.manzana,  "Descripción de la manzana",10000));
+        addProduct(db,new Product("Pera", R.drawable.pera, "Descripción de la pera", 4500));
     }
 
     public List<Product> listProducts() {
         List<Product> products = new ArrayList<>();
-        String sqlText = "SELECT _id, NAME, DESCRIPTION, IMAGE_ID FROM PRODUCTS";
+        String sqlText = "SELECT _id, NAME, DESCRIPTION, IMAGE_ID, VALUE FROM PRODUCTS";
 
         try {
             Cursor cursor = getReadableDatabase().rawQuery(sqlText, null);
@@ -72,7 +73,8 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
                 String name = cursor.getString(1);
                 int image_id = Integer.parseInt(cursor.getString(3));
                 String description = cursor.getString(2);
-                product = new Product(name, image_id, description);
+                int value = Integer.parseInt(cursor.getString(4));
+                product = new Product(name, image_id, description, value);
 
                 int id = Integer.parseInt(cursor.getString(0));
                 product.setId(id);
@@ -130,7 +132,7 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
 
     public Client searchClient(String rutToSearch) {
         Client client = null;
-        String sqlText = "SELECT _id, RUT, LOCAL_NAME, CONTACT_NAME, ADDRESS, PHONE FROM CLIENTS WHERE RUT = ?";
+        String sqlText = "SELECT _id, RUT, LOCAL_NAME, CONTACT_NAME, ADDRESS, PHONE FROM CLIENTS WHERE RUT = ? AND STATE = " + Client.ACTIVE_CLIENT;
 
         Cursor cursor = getReadableDatabase().rawQuery(sqlText, new String[] {rutToSearch});
         cursor.moveToFirst();
@@ -148,7 +150,7 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
 
     public List<Client> listClients() {
         List<Client> clients = new ArrayList<>();
-        String sqlText = "SELECT _id, RUT, LOCAL_NAME, CONTACT_NAME, ADDRESS, PHONE FROM CLIENTS";
+        String sqlText = "SELECT _id, RUT, LOCAL_NAME, CONTACT_NAME, ADDRESS, PHONE FROM CLIENTS WHERE STATE =" + Client.ACTIVE_CLIENT;
 
         try {
             Cursor cursor = getReadableDatabase().rawQuery(sqlText, null);
@@ -167,12 +169,13 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
         return clients;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(SQLiteDatabase db, Product product) {
         ContentValues values = new ContentValues();
-        values.put("NOMBRE", product.getName());
+        values.put("NAME", product.getName());
         values.put("DESCRIPTION", product.getDescription());
         values.put("IMAGE_ID", product.getImageId());
-        getWritableDatabase().insert("PRODUCTS", null, values);
+        values.put("VALUE", product.getValue());
+        db.insert("PRODUCTS", null, values);
     }
 
     public void addOrder(Order order) {
@@ -181,15 +184,15 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
         values.put("VALUE", order.getValue());
         values.put("STATE", Order.NOT_DELIVERED);
         values.put("CLIENT_RUT", order.getClient().getRut());
-        getWritableDatabase().insert("ORDERS", null, values);
+        int result = (int) getWritableDatabase().insert("ORDERS", null, values);
 
         for (ProductOrder productOrder : order.getProducts()) {
             ContentValues valuesProducts = new ContentValues();
             valuesProducts.put("PRODUCT_ID",productOrder.getProduct_id());
-            valuesProducts.put("ORDER_ID",productOrder.getOrder_id());
+            valuesProducts.put("ORDER_ID", result);
             valuesProducts.put("QUANTITY", productOrder.getQuantity());
             valuesProducts.put("VALUE", productOrder.getValue());
-            getWritableDatabase().insert("PRODUCT_ORDER", null, values);
+            getWritableDatabase().insert("PRODUCT_ORDER", null, valuesProducts);
         }
     }
 
@@ -209,9 +212,9 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
         return message;
     }
 
-    public List<Order> listOrders() {
+    public List<Order> listOrders(int stateToSearch) {
         List <Order> orders = new ArrayList<>();
-        String sqlText = "SELECT _id, DATE, VALUE, STATE, CLIENT_RUT FROM ORDERS";
+        String sqlText = "SELECT _id, DATE, VALUE, STATE, CLIENT_RUT FROM ORDERS WHERE STATE = " + stateToSearch;
 
         try {
             Cursor cursor = getWritableDatabase().rawQuery(sqlText, null);
@@ -252,7 +255,8 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
                 int order_id = Integer.parseInt(cursor.getString(1));
                 int quantity = Integer.parseInt(cursor.getString(2));
                 int value = Integer.parseInt(cursor.getString(3));
-                productOrder = new ProductOrder(quantity, value, product_id, order_id);
+                productOrder = new ProductOrder(quantity, value, product_id);
+                productOrder.setOrder_id(order_id);
                 list.add(productOrder);
             } while (cursor.moveToNext());
         } catch (SQLException e) {

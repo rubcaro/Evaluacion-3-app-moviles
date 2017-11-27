@@ -25,7 +25,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
 
         int productNumber = (Integer)getIntent().getExtras().get("product");
-        product = Product.products.get(productNumber);
+        //product = Product.products.get(productNumber);
 
         ImageView image = (ImageView) findViewById(R.id.foto);
         image.setImageResource(product.getImageId());

@@ -8,10 +8,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.List;
+
 import cl.inacap.parenas.evaluacion2.modelo.Client;
+import cl.inacap.parenas.evaluacion2.modelo.ClientDatabaseHelper;
 import cl.inacap.parenas.evaluacion2.modelo.Order;
 
 public class DeliverOrderActivity extends ListActivity {
+
+    ClientDatabaseHelper helper = new ClientDatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +24,10 @@ public class DeliverOrderActivity extends ListActivity {
         setContentView(R.layout.activity_deliver_order);
 
         ListView clientList = getListView();
-        Order order = new Order();
+        List<Order> ordersNotDelivered = helper.listOrders(Order.NOT_DELIVERED);
+
         ArrayAdapter<Order> listaAdapter = new ArrayAdapter<Order>(this,
-                android.R.layout.simple_list_item_1, Order.orders);
+                android.R.layout.simple_list_item_1, ordersNotDelivered);
         clientList.setAdapter(listaAdapter);
     }
 

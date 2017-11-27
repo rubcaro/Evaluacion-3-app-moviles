@@ -5,12 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cl.inacap.parenas.evaluacion2.DeliverOrderActivity">
+    tools:context="cl.inacap.parenas.evaluacion2.DeliverOrderActivity"
+    tools:layout_editor_absoluteY="25dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Órdenes sin entregar"
+        android:textSize="22sp"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="16dp"/>
 
     <ListView
         android:id="@+id/android:list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="283dp"
+        android:layout_height="211dp"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="62dp">
     </ListView>
 
 </android.support.constraint.ConstraintLayout>

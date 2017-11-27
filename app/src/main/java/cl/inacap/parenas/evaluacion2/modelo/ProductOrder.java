@@ -10,9 +10,8 @@ public class ProductOrder {
     private int quantity;
     private int value;
 
-    public ProductOrder(int quantity, int value, int product, int order) {
+    public ProductOrder(int quantity, int value, int product) {
         this.product_id = product;
-        this.order_id = order;
         this.quantity = quantity;
         this.value = value;
     }

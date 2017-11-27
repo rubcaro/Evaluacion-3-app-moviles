@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".OrderDetailsActivity">
         </activity>
+        <activity android:name=".OrdersMenuActivity">
+        </activity>
     </application>
 
 </manifest>

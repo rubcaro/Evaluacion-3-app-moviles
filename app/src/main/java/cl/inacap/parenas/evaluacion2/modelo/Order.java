@@ -17,7 +17,7 @@ public class Order {
     public static final int DELIVERED = 1;
     public static final int  NOT_DELIVERED = 0;
 
-    public Order(String date, int value, int state) {
+    public Order(String date, int value,int state) {
         this.date = date;
         this.value = value;
         this.state = state;

@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -16,20 +17,27 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import cl.inacap.parenas.evaluacion2.modelo.Client;
 import cl.inacap.parenas.evaluacion2.modelo.ClientDatabaseHelper;
 import cl.inacap.parenas.evaluacion2.modelo.Order;
 import cl.inacap.parenas.evaluacion2.modelo.Product;
+import cl.inacap.parenas.evaluacion2.modelo.ProductOrder;
 
 public class EnterOrderActivity extends ListActivity {
 
     EditText date;
     DatePickerDialog datePickerDialog;
-    int currentIdProduct;
     Order order;
     ClientDatabaseHelper helper = new ClientDatabaseHelper(this);
+    List<ProductOrder>productList = new ArrayList<>();
+    List<Product> products = new ArrayList<>();
+    List<Client> clients = new ArrayList<>();
+    Product currentProduct;
+    int totalOrderValue = 0;
 
 
     @Override
@@ -41,8 +49,9 @@ public class EnterOrderActivity extends ListActivity {
 
         Client client = new Client();
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        clients = helper.listClients();
         ArrayAdapter<Client> listaAdapter = new ArrayAdapter<Client>(this,
-                android.R.layout.simple_list_item_1, helper.listClients());
+                android.R.layout.simple_list_item_1, clients);
         spinner.setAdapter(listaAdapter);
 
         date = (EditText) findViewById(R.id.date);
@@ -69,8 +78,9 @@ public class EnterOrderActivity extends ListActivity {
         });
 
         ListView clientList = getListView();
+        products = helper.listProducts();
         ArrayAdapter<Product> listaAdapterProduct = new ArrayAdapter<Product>(this,
-                android.R.layout.simple_list_item_1,helper.listProducts() );
+                android.R.layout.simple_list_item_1, products);
         clientList.setAdapter(listaAdapterProduct);
 
     }
@@ -87,16 +97,26 @@ public class EnterOrderActivity extends ListActivity {
 
 
         TextView productQuantityText = (TextView) findViewById(R.id.productQuantity);
-        String productQuantity = productQuantityText.getText().toString();
+        int productQuantity = Integer.parseInt(productQuantityText.getText().toString());
 
         TextView selectedProductText = (TextView) findViewById(R.id.selectedProduct);
         String selectedProduct = selectedProductText.getText().toString();
 
-        if(!selectedProduct.equals("") && !productQuantity.equals("")) {
-            order.addProduct(currentIdProduct);
+        if(currentProduct != null && !String.valueOf(productQuantity).equals("")) {
+
+            int totalvalue = currentProduct.getValue() * productQuantity;
+            totalOrderValue = totalOrderValue + totalvalue;
+            ProductOrder productOrder = new ProductOrder(productQuantity,totalvalue ,currentProduct.getId());
+            productList.add(productOrder);
+            //order.addProduct(currentIdProduct);
             TextView productsList = (TextView) findViewById(R.id.productsList);
-            String value = productsList.getText().toString().concat("\n Producto: " + selectedProduct + " -  Cantidad: " + productQuantity);
+            String value = productsList.getText().toString().concat("\n Producto: " + selectedProduct + " -  Cantidad: " + productQuantity
+            + " - Valor:" + totalvalue);
             productsList.setText(value);
+
+            Log.d("mensaje", String.valueOf(totalOrderValue));
+            TextView totalOrderValueText = (TextView) findViewById(R.id.totalOrderValue);
+            totalOrderValueText.setText(String.valueOf(totalOrderValue));
 
             productQuantityText.setText("");
             selectedProductText.setText("");
@@ -109,31 +129,33 @@ public class EnterOrderActivity extends ListActivity {
     }
 
     public void addOrder(View view) {
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        String client = spinner.getSelectedItem().toString();
+        int clientPosition = spinner.getSelectedItemPosition();
+        Client client = clients.get(clientPosition);
 
         EditText dateText = (EditText) findViewById(R.id.date);
         String date = dateText.getText().toString();
 
-        EditText valueText = (EditText) findViewById(R.id.value);
-        String value = valueText.getText().toString();
-
         order.setClient(client);
         order.setDate(date);
-        order.setValue(Integer.parseInt(value));
-        order.save();
+        order.setValue(totalOrderValue);
+        order.setProducts(productList);//Verificar que no esté vacío
+
+        helper.addOrder(order);
 
         Toast msgError = Toast.makeText(this, "Orden correctamente ingresada", Toast.LENGTH_LONG);
         msgError.show();
     }
 
 
+
     @Override
     public void onListItemClick(ListView ListView, View item, int posicion, long id) {
 
         TextView selectedProduct = (TextView) findViewById(R.id.selectedProduct);
-        Product currentProduct = Product.products.get((int) id);
-        currentIdProduct = (int) id;
+        currentProduct = products.get((int) id);
+       // currentIdProduct = (int) id;
         selectedProduct.setText(currentProduct.getName());
     }
 }

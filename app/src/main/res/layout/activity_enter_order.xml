@@ -192,14 +192,13 @@
                 android:textColor="@android:color/background_dark"
                 android:textSize="15sp"/>
 
-            <EditText
-                android:id="@+id/value"
+            <TextView
+                android:id="@+id/totalOrderValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:hint="Ingrese valor del pedido"
-                android:inputType="number"/>
+                />
+
         </LinearLayout>
 
         <LinearLayout
