@@ -61,6 +61,20 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
         addProduct(db,new Product("Pera", R.drawable.pera, "Descripción de la pera", 4500));
     }
 
+    public Product searchProduct(int productId) {
+        Product product = null;
+        String sqlText = "SELECT NAME FROM PRODUCTS WHERE _id =" + productId;
+
+        Cursor cursor = getReadableDatabase().rawQuery(sqlText, null);
+        cursor.moveToFirst();
+        product = new Product();
+        String name = cursor.getString(0);
+        product.setName(name);
+        return product;
+
+    }
+
+
     public List<Product> listProducts() {
         List<Product> products = new ArrayList<>();
         String sqlText = "SELECT _id, NAME, DESCRIPTION, IMAGE_ID, VALUE FROM PRODUCTS";
@@ -196,7 +210,7 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
-    public String deliverOrder(int id) {
+    public String deliverOrder(String id) {
         String message = "Orden ha cambiado su estado a entregada";
 
         String sqlText = "UPDATE ORDERS SET STATE = " + Order.DELIVERED + " WHERE _id = ?";
@@ -212,28 +226,52 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
         return message;
     }
 
+    public Order searchOrder(String Orderid) {
+        Order order = null;
+        String sqlText = "SELECT _id, DATE, VALUE, STATE, CLIENT_RUT FROM ORDERS WHERE _id =" + Orderid;
+
+        Cursor cursor = getReadableDatabase().rawQuery(sqlText,null);
+        cursor.moveToFirst();
+
+        String id = cursor.getString(0);
+        String date = cursor.getString(1);
+        int value = Integer.parseInt(cursor.getString(2));
+        int state = Integer.parseInt(cursor.getString(3));
+        String rut = cursor.getString(4);
+
+        order = new Order(date,value,state);
+        order.setId(id);
+        order.setClient(searchClient(rut));
+        order.setProducts(searchProductOrder(id));
+
+        return order;
+
+    }
+
     public List<Order> listOrders(int stateToSearch) {
         List <Order> orders = new ArrayList<>();
         String sqlText = "SELECT _id, DATE, VALUE, STATE, CLIENT_RUT FROM ORDERS WHERE STATE = " + stateToSearch;
 
         try {
             Cursor cursor = getWritableDatabase().rawQuery(sqlText, null);
-            cursor.moveToFirst();
+            boolean flag = cursor.moveToFirst();
             Order order;
             String rut;
             do {
-                String date = cursor.getString(1);
-                String id = cursor.getString(0);
-                int value = Integer.parseInt(cursor.getString(2));
-                int state = Integer.parseInt(cursor.getString(3));
-                order = new Order(date, value, state);
+                if (flag) {
+                    String date = cursor.getString(1);
+                    String id = cursor.getString(0);
+                    int value = Integer.parseInt(cursor.getString(2));
+                    int state = Integer.parseInt(cursor.getString(3));
+                    order = new Order(date, value, state);
 
-                rut = cursor.getString(4);
-                order.setClient(searchClient(rut));
-                order.setProducts(searchProductOrder(id));
+                    rut = cursor.getString(4);
+                    order.setClient(searchClient(rut));
+                    order.setProducts(searchProductOrder(id));
 
-                order.setId(cursor.getString(0));
-                orders.add(order);
+                    order.setId(cursor.getString(0));
+                    orders.add(order);
+                }
             } while (cursor.moveToNext());
         } catch (SQLException e) {
             orders = null;

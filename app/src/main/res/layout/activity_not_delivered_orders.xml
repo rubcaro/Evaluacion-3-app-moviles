@@ -6,15 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cl.inacap.parenas.evaluacion2.DeliverOrderActivity"
-    tools:layout_editor_absoluteY="25dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:context="cl.inacap.parenas.evaluacion2.NotDeliveredOrdersActivity">
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Órdenes sin entregar"
+        android:text="Órdenes entregadas"
         android:textSize="22sp"
         tools:layout_editor_absoluteX="72dp"
         tools:layout_editor_absoluteY="16dp"/>

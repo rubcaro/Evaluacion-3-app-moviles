@@ -38,6 +38,12 @@
         </activity>
         <activity android:name=".OrdersMenuActivity">
         </activity>
+        <activity android:name=".BalanceActivity">
+        </activity>
+        <activity android:name=".DeliveredOrders">
+        </activity>
+        <activity android:name=".NotDeliveredOrdersActivity">
+        </activity>
     </application>
 
 </manifest>

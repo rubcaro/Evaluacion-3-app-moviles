@@ -25,7 +25,7 @@ public class MenuActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if (position == 2) {
-                    Intent intent = new Intent(MenuActivity.this, DeliverOrderActivity.class);
+                    Intent intent = new Intent(MenuActivity.this, OrdersMenuActivity.class);
                     startActivity(intent);
                 }
                 else if (position == 3) {

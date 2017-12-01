@@ -11,4 +11,10 @@
         <item>Modificar cliente</item>
         <item>Volver</item>
     </string-array>
+    <string-array name="orderOptions">
+        <item>Órdenes sin entregar</item>
+        <item>Órdenes entregadas</item>
+        <item>Balance</item>
+        <item>Volver</item>
+    </string-array>
 </resources>

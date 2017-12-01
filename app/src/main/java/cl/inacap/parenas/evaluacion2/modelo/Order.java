@@ -77,11 +77,9 @@ public class Order {
     @Override
     public String toString() {
 
-        return "[" +
-                "Fecha: " + this.date + '\''+
-                "Rut Cliente: " + this.client.getRut() + '\'' +
-                "Total a pagar: " + this.getValue() + '\'' +
-                "Estado: " + this.getState() + '\'' +
-                "]";
+        return "Fecha: " + this.date + '\n'+
+                "Rut Cliente: " + this.client.getRut() + '\n' +
+                "Total a pagar: " + this.getValue() + '\n' +
+                "Estado: " + this.getState() + '\n';
     }
 }

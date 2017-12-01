@@ -10,32 +10,31 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import cl.inacap.parenas.evaluacion2.modelo.Client;
 import cl.inacap.parenas.evaluacion2.modelo.ClientDatabaseHelper;
 import cl.inacap.parenas.evaluacion2.modelo.Order;
 
-public class DeliverOrderActivity extends ListActivity {
+public class NotDeliveredOrdersActivity extends ListActivity {
 
     ClientDatabaseHelper helper = new ClientDatabaseHelper(this);
-    List<Order> ordersNotDelivered;
+    List<Order> deliveredOrders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deliver_order);
+        setContentView(R.layout.activity_not_delivered_orders);
 
         ListView clientList = getListView();
-        ordersNotDelivered = helper.listOrders(Order.NOT_DELIVERED);
+        deliveredOrders = helper.listOrders(Order.DELIVERED);
 
         ArrayAdapter<Order> listaAdapter = new ArrayAdapter<Order>(this,
-                android.R.layout.simple_list_item_1, ordersNotDelivered);
+                android.R.layout.simple_list_item_1, deliveredOrders);
         clientList.setAdapter(listaAdapter);
     }
 
     @Override
     public void onListItemClick(ListView ListView, View item, int posicion, long id) {
-        Intent intent = new Intent(DeliverOrderActivity.this, OrderDetailsActivity.class);
-        String orderId = ordersNotDelivered.get((int) id).getId();
+        Intent intent = new Intent(NotDeliveredOrdersActivity.this, OrderDetailsActivity.class);
+        String orderId = deliveredOrders.get((int) id).getId();
         intent.putExtra("order", orderId);
         startActivity(intent);
     }

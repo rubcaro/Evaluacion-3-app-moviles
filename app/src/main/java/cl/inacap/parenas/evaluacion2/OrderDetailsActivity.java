@@ -14,23 +14,36 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import cl.inacap.parenas.evaluacion2.modelo.ClientDatabaseHelper;
 import cl.inacap.parenas.evaluacion2.modelo.Order;
 import cl.inacap.parenas.evaluacion2.modelo.Product;
+import cl.inacap.parenas.evaluacion2.modelo.ProductOrder;
 
 public class OrderDetailsActivity extends ListActivity {
 
     Order order;
+    ClientDatabaseHelper helper = new ClientDatabaseHelper(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
 
-       /* int orderNumber = (Integer)getIntent().getExtras().get("order");
-        order = Order.orders.get(orderNumber);
+        String orderNumber = getIntent().getExtras().get("order").toString();
+        order = helper.searchOrder(orderNumber);
+        List<String> productsDetails = new ArrayList<>();
+
+        for (ProductOrder product : order.getProducts()) {
+
+            Product p = helper.searchProduct(product.getProduct_id());
+            String chain = "Producto: " +  p.getName() + " - Cantidad: " + product.getQuantity() + " - Valor: " + product.getValue();
+            productsDetails.add(chain);
+        }
+
 
         TextView clientNameText = (TextView) findViewById(R.id.clientNameText);
-        clientNameText.setText(order.getClient());
+        clientNameText.setText(order.getClient().getLocalName());
 
         TextView dateText = (TextView) findViewById(R.id.dateText);
         dateText.setText(order.getDate());
@@ -41,15 +54,11 @@ public class OrderDetailsActivity extends ListActivity {
         TextView stateText =(TextView) findViewById(R.id.stateText);
         stateText.setText("Estado: " + order.getState());
 
-        List<Product> products = new ArrayList<Product>();
-        for (Integer id : order.getProducts()) {
-            products.add(Product.products.get(id));
-        }
 
         ListView clientList = getListView();
-        ArrayAdapter<Product> listaAdapter = new ArrayAdapter<Product>(this,
-                android.R.layout.simple_list_item_1, products);
-        clientList.setAdapter(listaAdapter);*/
+        ArrayAdapter<String> listaAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, productsDetails);
+        clientList.setAdapter(listaAdapter);
     }
 
     public void back(View view) {
@@ -58,12 +67,12 @@ public class OrderDetailsActivity extends ListActivity {
     }
 
     public void deliver(View view) {
-        //order.setState("Entregado");
+        String message = helper.deliverOrder(order.getId());
 
         TextView stateText =(TextView) findViewById(R.id.stateText);
         stateText.setText("Estado: " + order.getState());
 
-        Toast msgError = Toast.makeText(this, "Pedido correctamente entregado", Toast.LENGTH_LONG);
+        Toast msgError = Toast.makeText(this, message, Toast.LENGTH_LONG);
         msgError.show();
     }
 }
