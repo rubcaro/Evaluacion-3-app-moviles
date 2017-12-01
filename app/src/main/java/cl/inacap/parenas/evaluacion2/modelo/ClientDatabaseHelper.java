@@ -146,7 +146,7 @@ public class ClientDatabaseHelper extends SQLiteOpenHelper{
 
     public Client searchClient(String rutToSearch) {
         Client client = null;
-        String sqlText = "SELECT _id, RUT, LOCAL_NAME, CONTACT_NAME, ADDRESS, PHONE FROM CLIENTS WHERE RUT = ? AND STATE = " + Client.ACTIVE_CLIENT;
+        String sqlText = "SELECT _id, RUT, LOCAL_NAME, CONTACT_NAME, ADDRESS, PHONE FROM CLIENTS WHERE RUT = ?";
 
         Cursor cursor = getReadableDatabase().rawQuery(sqlText, new String[] {rutToSearch});
         cursor.moveToFirst();

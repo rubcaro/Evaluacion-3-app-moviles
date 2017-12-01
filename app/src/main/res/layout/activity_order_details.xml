@@ -23,14 +23,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cliente:"/>
+            android:text="Cliente:"
+            android:textColor="@android:color/background_dark"/>
 
         <TextView
             android:id="@+id/clientNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            />
+            android:textColor="@android:color/background_dark"/>
     </LinearLayout>
 
     <LinearLayout
@@ -45,14 +46,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Fecha:"/>
+            android:text="Fecha:"
+            android:textColor="@android:color/background_dark"/>
 
         <TextView
             android:id="@+id/dateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            />
+            android:textColor="@android:color/background_dark"/>
 
     </LinearLayout>
 
@@ -68,14 +70,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Valor:"/>
+            android:text="Valor:"
+            android:textColor="@android:color/background_dark"/>
 
         <TextView
             android:id="@+id/valueText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            />
+            android:textColor="@android:color/background_dark"/>
     </LinearLayout>
 
     <LinearLayout
@@ -101,7 +104,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Estado: "/>
+            android:text="Estado: "
+            android:textColor="@android:color/background_dark"/>
 
         <Button
             android:id="@+id/button10"

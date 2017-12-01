@@ -5,7 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="20dp"
     android:orientation="vertical"
+    android:paddingLeft="5dp"
     tools:context="cl.inacap.parenas.evaluacion2.BalanceActivity">
 
     <LinearLayout
@@ -18,7 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Balance general"/>
+            android:text="Balance general"
+            android:textColor="@android:color/background_dark"/>
     </LinearLayout>
 
     <LinearLayout
@@ -31,14 +35,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Monto por recaudar:"/>
+            android:text="Monto por recaudar:"
+            android:textColor="@android:color/background_dark"/>
 
         <TextView
             android:id="@+id/toCollectText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            />
+            android:textColor="@android:color/background_dark"/>
     </LinearLayout>
 
     <LinearLayout
@@ -51,13 +56,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Monto recaudado:"/>
+            android:text="Monto recaudado:"
+            android:textColor="@android:color/background_dark"/>
 
         <TextView
             android:id="@+id/collectedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textColor="@android:color/background_dark"/>
     </LinearLayout>
 
     <LinearLayout
@@ -70,13 +77,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Monto total:"/>
+            android:text="Monto total:"
+            android:textColor="@android:color/background_dark"/>
 
         <TextView
             android:id="@+id/totalValueText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            />
+            android:textColor="@android:color/background_dark"/>
     </LinearLayout>
 </LinearLayout>
