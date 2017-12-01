@@ -3,7 +3,7 @@
     <string-array name="menuItems">
         <item>Administración de clientes</item>
         <item>Ingresar pedido</item>
-        <item>Entregar pedido</item>
+        <item>Ver pedidos</item>
         <item>Salir</item>
     </string-array>
     <string-array name="clientOptions">

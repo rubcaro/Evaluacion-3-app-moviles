@@ -74,5 +74,8 @@ public class OrderDetailsActivity extends ListActivity {
 
         Toast msgError = Toast.makeText(this, message, Toast.LENGTH_LONG);
         msgError.show();
+
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 }

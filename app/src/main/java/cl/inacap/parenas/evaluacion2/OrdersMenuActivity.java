@@ -30,7 +30,7 @@ public class OrdersMenuActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if (position == 3) {
-                    Intent intent = new Intent(OrdersMenuActivity.this, MainActivity.class);
+                    Intent intent = new Intent(OrdersMenuActivity.this, MenuActivity.class);
                     startActivity(intent);
                 }
             }
